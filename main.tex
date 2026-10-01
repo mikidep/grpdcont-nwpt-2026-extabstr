@@ -1,0 +1,112 @@
+% easychair.tex,v 3.5 2017/03/15
+
+\documentclass[a4paper]{easychair}
+
+\usepackage{doc}
+
+% In order to save space or manage large tables or figures in a
+% landcape-like text, you can use the rotating and pdflscape
+% packages. Uncomment the desired from the below.
+%
+% \usepackage{rotating}
+% \usepackage{pdflscape}
+
+%% Front Matter
+%%
+% Regular title as in the article class.
+%
+\title{Groupoid Containers in Locally Univalent 2,1-Categories}
+
+\author{
+Michele De Pascalis\inst{1}
+\and
+Niccol{\`o} Veltri\inst{2}
+\and
+Tarmo Uustalu\inst{3}\inst{4}
+}
+
+\institute{
+Tallinn University of Technology, Estonia
+\email{michde@taltech.ee}
+\and
+Tallinn University of Technology, Estonia
+\email{niccolo@cs.ioc.ee}
+\and
+Tallinn University of Technology, Estonia
+\and
+Reykjav\'ik University, Iceland
+\email{tarmo@ru.is}
+}
+
+\authorrunning{De Pascalis, Veltri and Uustalu}
+
+\titlerunning{Groupoid Containers in Locally Univalent 2,1-Categories}
+
+\input{macros.tex}
+
+\begin{document}
+
+\maketitle
+
+\vspace{1.2em}
+
+% \setcounter{tocdepth}{2}
+% {\small
+% 	\tableofcontents}
+
+%%%%%%%%%%%
+%% INTRO %%
+%%%%%%%%%%%
+
+It is a well known result in the study of containers \cite{Abbott2005} that
+their interpretation \(\ext{-}\) as mappings between types yields a full and
+faithful functor from the category \(\Cont\) of containers and container
+morphisms, to the category \(\Endo(\Set)\) of \(\Set\) endofunctors. Moreover,
+it has been shown \cite{Uustalu2017} that this functor is strong monoidal when
+the two categories are equipped with the monoidal structures of container
+substitution on one side, and of functor composition on the other.
+
+Stated in this way, these results apply to the interpretations of type theory
+where types stand for sets. However, it is also well known by now that more
+complex interpretations are possible and worthwhile. When attempting to
+replicate the above reasoning in Homotopy Type Theory
+% cite
+(an interpretation in which types stand for homotopy types), one has to add the
+constraint that shapes and positions are set-truncated, lest the full
+faithfulness result fail to extend.
+
+In this work we adopt a more foundational approach, exploring a higher
+categorical setting in which groupoid-truncated containers shall be rightful
+inhabitants, where we expect to (and indeed will) find analogous properties.
+% pretty dramatic I know
+
+\begin{section}{Locally Univalent 2,1-Categories}
+ 
+ We deal with the following notion of (2,1)-category, adapted from
+ \cite{Finster2021}:
+ 
+ A locally univalent (2,1)-category is a wild category whose \(\hom\)-types are
+ \(\hGpd\)s. Explicitly:
+\end{section}
+
+\begin{section}{Groupoid Containers}
+ 
+\end{section}
+
+\begin{section}{Monoids in \(\GpdCont\)}
+ 
+\end{section}
+
+\begin{section}{Free monoids in \(\GpdCont\)}
+ 
+\end{section}
+
+
+\label{sect:bib}
+
+\bibliographystyle{plain}
+\bibliography{main}
+
+%------------------------------------------------------------------------------
+\end{document}
+

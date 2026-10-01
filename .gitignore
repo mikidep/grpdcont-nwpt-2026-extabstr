@@ -1,0 +1,13 @@
+# nix build output
+result
+build/
+.direnv
+
+*~
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
+*.pag
+*.pdf
