@@ -3,6 +3,7 @@
 \documentclass[a4paper]{easychair}
 
 \usepackage{doc}
+\usepackage{todonotes}
 
 % In order to save space or manage large tables or figures in a
 % landcape-like text, you can use the rotating and pdflscape
@@ -87,6 +88,22 @@ inhabitants, where we expect to (and indeed will) find analogous properties.
  
  A locally univalent (2,1)-category is a wild category whose \(\hom\)-types are
  \(\hGpd\)s. Explicitly:
+ 
+ \begin{align*}
+	 C_0              & : \Type                                                                                   \\
+	 C_1(X , Y)       & : \hGpd                                          & \forall & X , Y : C_0                  \\
+	 \id_X            & : C_1(X , X)                                     & \forall & X : C_0                      \\
+	 f \star g        & : C_1(X , Z)                                     & \forall & X, Y, Z : C_0,               \\
+	                  &                                                  &         & f : C_1(X, Y), g : C_1(Y, Z) \\
+	 \idl_f           & : \id_X \star f \equiv f                         & \forall & X , Y : C_0, f : C_1(X,Y)    \\
+	 \idr_f           & : f \star \id_Y \equiv f                         & \forall & X , Y : C_0, f : C_1(X,Y)    \\
+	 \assoc_{f, g, h} & : (f \star g) \star h \equiv f \star (g \star h) & \forall & X
+	 , Y , Z , W : C_0,                                                                                           \\
+	 \textsf{etc.}
+ \end{align*}
+ \todo[inline]{put in the rest}
+ 
+ 
 \end{section}
 
 \begin{section}{Groupoid Containers}
