@@ -5,6 +5,8 @@
 \usepackage{doc}
 \usepackage{todonotes}
 
+\setuptodonotes{inline}
+
 % In order to save space or manage large tables or figures in a
 % landcape-like text, you can use the rotating and pdflscape
 % packages. Uncomment the desired from the below.
@@ -71,7 +73,7 @@ Stated in this way, these results apply to the interpretations of type theory
 where types stand for sets. However, it is also well known by now that more
 complex interpretations are possible and worthwhile. When attempting to
 replicate the above reasoning in Homotopy Type Theory
-% cite
+\todo{Cite HoTT book}
 (an interpretation in which types stand for homotopy types), one has to add the
 constraint that shapes and positions are set-truncated, lest the full
 faithfulness result fail to extend.
@@ -90,19 +92,50 @@ inhabitants, where we expect to (and indeed will) find analogous properties.
  \(\hGpd\)s. Explicitly:
  
  \begin{align*}
-	 C_0              & : \Type                                                                                   \\
-	 C_1(X , Y)       & : \hGpd                                          & \forall & X , Y : C_0                  \\
-	 \id_X            & : C_1(X , X)                                     & \forall & X : C_0                      \\
-	 f \star g        & : C_1(X , Z)                                     & \forall & X, Y, Z : C_0,               \\
-	                  &                                                  &         & f : C_1(X, Y), g : C_1(Y, Z) \\
-	 \idl_f           & : \id_X \star f \equiv f                         & \forall & X , Y : C_0, f : C_1(X,Y)    \\
-	 \idr_f           & : f \star \id_Y \equiv f                         & \forall & X , Y : C_0, f : C_1(X,Y)    \\
-	 \assoc_{f, g, h} & : (f \star g) \star h \equiv f \star (g \star h) & \forall & X
-	 , Y , Z , W : C_0,                                                                                           \\
-	 \textsf{etc.}
+	 C_0              & : \Type                                                                                       \\
+	 C_1(X , Y)       & : \hGpd                                           & \forall & X , Y : C_0                     \\
+	 \id_X            & : C_1(X , X)                                      & \forall & X : C_0                         \\
+	 f \star g        & : C_1(X , Z)                                      & \forall & X, Y, Z : C_0, \; f : C_1(X, Y), \; g : C_1(Y, Z) \\
+	 \idl_f           & : \id_X \star f \equiv f                          & \forall & X , Y : C_0, f : C_1(X,Y)       \\
+	 \idr_f           & : f \star \id_Y \equiv f                          & \forall & X , Y : C_0, f : C_1(X,Y)       \\
+	 \assoc_{f, g, h} & : (f \star g) \star h \equiv f \star (g \star h)  & \forall & X , Y , Z , W : C_0,            \\
+	                  &                                                   &         & f : C_1(X, Y), \; g : C_1(Y, Z), \; h : C_1(Z, W)              
  \end{align*}
- \todo[inline]{put in the rest}
  
+ These must satisfy:
+ 
+ \begin{itemize}
+	 \item The triangle equation: for all appropriately typed \(f, g\),
+	       \[ \assoc_{f,
+		       \id_Y,g}
+	       \ct f 
+	       \trl 
+	       \idl_g = 
+	       \idr_f 
+	       \trr g \]
+	 \item The pentagon equation: for all appropriately typed \(f, g, h, k\),
+	       \[
+		       \assoc_{f,g,h} \trr k
+		       \ct \assoc_{f,g \star h,k}
+		       \ct f \trl \assoc_{g,h,k} \
+		       = \assoc_{f \star g,h,k}
+		       \ct \assoc_{f,g,h \star k}
+	       \]
+ \end{itemize}
+
+ In the above, 2-cell composition \(p \ct q\) is defined as HoTT-style path
+ composition, and whiskerings \(f \trl q\) and \(p \trr g\) are defined as \eg{} \(f
+ \trl q \defas \cong \, (f \star -) \, q\).
+ Morally, we let the identity type \(f \equiv g\) and the associated
+ syntactic rules internalise the groupoid structure of a 2,1-category. As it is
+ possible to interpret MLTT as a theory of \(\infty\)-groupoids, this provides a
+ lot of the constructions and coherences required by higher category theory. For
+ example, all functions between types are automatically functorial on their
+ identity groupoids. In particular this makes 1-cell composition \(- \star -\)
+ bifunctorial, something which would be an extra requirement to be imposed on it
+ in a traditional presentation.
+ 
+ \todo{Talk about functors and nat. trans.}
  
 \end{section}
 

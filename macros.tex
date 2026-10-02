@@ -1,37 +1,52 @@
 \usepackage{stmaryrd} %for Dana Scott brackets
 \usepackage{newunicodechar}
+\usepackage{stix}
+\usepackage{mathtools}
+
+\newcommand{\eg}{\textit{e.g.}}
+
+\DeclareMathOperator{\idl}{idl}
+\DeclareMathOperator{\idr}{idr}
+\DeclareMathOperator{\assoc}{assoc}
+
+\let\cong\relax
+\DeclareMathOperator{\cong}{cong}
+
+\DeclareMathOperator{\ct}{\mathbin\centerdot}
+\DeclareMathOperator{\trl}{\mathbin{\smalltriangleleft}}
+\DeclareMathOperator{\trr}{\mathbin{\smalltriangleright}}
+\newcommand{\cont}[2]{#1 \mathbin{\triangleleft} #2}
+\DeclareMathOperator{\Endo}{Endo}
+\DeclareMathOperator{\id}{id}
+\newcommand{\catname}[1]{\mathsf{#1}}
+\newcommand{\Set}{\catname{Set}}
+\newcommand{\Cont}{\catname{Cont}}
+\newcommand{\GpdCont}{\catname{GpdCont}}
+\newcommand{\ext}[1]{\llbracket{#1}\rrbracket}
+\newcommand{\hGpd}{\mathsf{hGpd}}
+\newcommand{\Type}{\mathsf{Type}}
 
 % \newunicodechar{≃}{\ensuremath{\simeq}}
 % \newunicodechar{λ}{\ensuremath{\lambda}}
 
-\newcommand{\cont}[2]{#1 \mathbin{\triangleleft} #2}
 % \DeclareMathOperator{\map}{map}
 % \DeclareMathOperator{\Mon}{Mon}
 % \DeclareMathOperator{\Mnd}{Mnd}
-\DeclareMathOperator{\Endo}{Endo}
 % \DeclareMathOperator{\Poly}{Poly}
 % \DeclareMathOperator{\Nat}{Nat}
 % \DeclareMathOperator{\Fin}{Fin}
 % \DeclareMathOperator{\Id}{Id}
 % \DeclareMathOperator{\ICMS}{ICMS}
 % \DeclareMathOperator{\isICMM}{isICMM}
-\DeclareMathOperator{\id}{id}
 % \DeclareMathOperator{\PSh}{PSh}
 % \DeclareMathOperator{\coPSh}{coPSh}
 % \DeclareMathOperator{\St}{St}
 % \DeclareMathOperator{\refl}{refl}
 % \DeclareMathOperator{\Wr}{Wr}
 
-\DeclareMathOperator{\idl}{idl}
-\DeclareMathOperator{\idr}{idr}
-\DeclareMathOperator{\assoc}{assoc}
 
 % \newcommand{\letin}[2]{\mathsf{let\:} #1 \mathsf{\:in\:} #2}
 % \newcommand{\ISt}[1]{\St^I_{#1}}
-\newcommand{\catname}[1]{\mathsf{#1}}
-\newcommand{\Set}{\catname{Set}}
-\newcommand{\Cont}{\catname{Cont}}
-\newcommand{\GpdCont}{\catname{GpdCont}}
 % \newcommand{\ICMSCat}{\catname{ICMSCat}} % There must be a better way
 % \newcommand{\Cat}{\catname{Cat}}
 % \newcommand{\SetI}{\Set^I}
@@ -39,7 +54,6 @@
 % \newcommand{\ICI}{\IC_I}
 % \newcommand{\C}{\mathcal{C}}
 % \newcommand{\D}{\mathcal{D}}
-\newcommand{\ext}[1]{\llbracket{#1}\rrbracket}
 % \newcommand{\x}{\times}
 % \newcommand{\ox}{\mathbin{\otimes}}
 % \newcommand{\I}{\mathsf{I}}
@@ -67,7 +81,8 @@
 % \DeclareMathOperator{\inr}{\mathsf{inr}}
 % \DeclareMathOperator{\fst}{\mathsf{fst}}
 % \DeclareMathOperator{\snd}{\mathsf{snd}}
-% \newcommand{\eqdef}{\mathbin{\overset{\mathsf{def}}{=}}}
+\renewcommand{\eqdef}{\mathrel{\overset{\mathsf{def}}{=}}}
+\renewcommand{\defas}{\coloneq}
 % \newcommand{\semi}{\mathbin{\pmb ;}}
 % \newcommand{\pair}[2]{(#1, #2)}
 % \newcommand{\triple}[3]{(#1 , #2 , #3)}
@@ -79,8 +94,6 @@
 % \newcommand{\Bool}{\mathsf{Bool}}
 % \newcommand{\true}{\mathsf{true}}
 % \newcommand{\false}{\mathsf{false}}
-\newcommand{\hGpd}{\mathsf{hGpd}}
-\newcommand{\Type}{\mathsf{Type}}
 
 % \DeclareMathOperator{\data}{data\ }
 % \DeclareMathOperator{\where}{\ where}
