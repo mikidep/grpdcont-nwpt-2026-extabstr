@@ -3,7 +3,25 @@
 \usepackage{stix}
 \usepackage{mathtools}
 
-\newcommand{\eg}{\textit{e.g.}}
+% The following from: https://stackoverflow.com/a/39363004
+\usepackage{xspace}
+
+% Add a period to the end of an abbreviation unless there's one
+% already, then \xspace.
+\makeatletter
+\DeclareRobustCommand\onedot{\futurelet\@let@token\@onedot}
+\def\@onedot{\ifx\@let@token.\else.\null\fi\xspace}
+
+\def\eg{\emph{e.g}\onedot} \def\Eg{\emph{E.g}\onedot}
+\def\ie{\emph{i.e}\onedot} \def\Ie{\emph{I.e}\onedot}
+\def\cf{\emph{c.f}\onedot} \def\Cf{\emph{C.f}\onedot}
+\def\etc{\emph{etc}\onedot} \def\vs{\emph{vs}\onedot}
+\def\wrt{w.r.t\onedot} \def\dof{d.o.f\onedot}
+\def\etal{\emph{et al}\onedot}
+\makeatother
+
+% A choice of abbreviation for Locally Univalent 2,1-category
+\newcommand{\lutc}{LU2C}
 
 \DeclareMathOperator{\idl}{idl}
 \DeclareMathOperator{\idr}{idr}
@@ -20,11 +38,17 @@
 \DeclareMathOperator{\id}{id}
 \newcommand{\catname}[1]{\mathsf{#1}}
 \newcommand{\Set}{\catname{Set}}
+\newcommand{\HGpd}{\catname{HGpd}}
 \newcommand{\Cont}{\catname{Cont}}
 \newcommand{\GpdCont}{\catname{GpdCont}}
 \newcommand{\ext}[1]{\llbracket{#1}\rrbracket}
+\newcommand{\hSet}{\mathsf{hSet}}
 \newcommand{\hGpd}{\mathsf{hGpd}}
 \newcommand{\Type}{\mathsf{Type}}
+\newcommand{\defas}{\coloneqq}
+\DeclareMathOperator{\csubst}{\mathbin\slash}
+\newcommand{\I}{\mathsf{I}}
+\DeclareMathOperator{\Id}{Id}
 
 % \newunicodechar{≃}{\ensuremath{\simeq}}
 % \newunicodechar{λ}{\ensuremath{\lambda}}
@@ -35,7 +59,6 @@
 % \DeclareMathOperator{\Poly}{Poly}
 % \DeclareMathOperator{\Nat}{Nat}
 % \DeclareMathOperator{\Fin}{Fin}
-% \DeclareMathOperator{\Id}{Id}
 % \DeclareMathOperator{\ICMS}{ICMS}
 % \DeclareMathOperator{\isICMM}{isICMM}
 % \DeclareMathOperator{\PSh}{PSh}
@@ -56,7 +79,6 @@
 % \newcommand{\D}{\mathcal{D}}
 % \newcommand{\x}{\times}
 % \newcommand{\ox}{\mathbin{\otimes}}
-% \newcommand{\I}{\mathsf{I}}
 % \newcommand{\tosim}{\xrightarrow{\sim}}
 % \newcommand{\toI}{\to^I}
 % \newcommand{\upa}{\mathbin\uparrow}
