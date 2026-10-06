@@ -11,3 +11,5 @@ build/
 *.out
 *.pag
 *.pdf
+
+*_ltex.json

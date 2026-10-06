@@ -34,6 +34,10 @@
 \DeclareMathOperator{\trl}{\mathbin{\smalltriangleleft}}
 \DeclareMathOperator{\trr}{\mathbin{\smalltriangleright}}
 \newcommand{\cont}[2]{#1 \mathbin{\triangleleft} #2}
+\newcommand{\theext}[3]{
+	\sum_{\lowercase{#1} : #1}
+	\left(#2_{\lowercase{#1}} \to #3\right)
+}
 \DeclareMathOperator{\Endo}{Endo}
 \DeclareMathOperator{\id}{id}
 \newcommand{\catname}[1]{\mathsf{#1}}
