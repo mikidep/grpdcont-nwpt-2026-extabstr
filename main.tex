@@ -38,11 +38,6 @@ Tallinn University of Technology, Estonia
 \and
 Tallinn University of Technology, Estonia
 \email{niccolo@cs.ioc.ee}
-\and
-Tallinn University of Technology, Estonia
-\and
-Reykjav\'ik University, Iceland
-\email{tarmo@ru.is}
 }
 
 \authorrunning{De Pascalis, Veltri and Uustalu}
@@ -105,13 +100,13 @@ analogous properties.
  We deal with the following notion of (2,1)-category, adapted from
  ~\cite{Finster2021}:
  
- \begin{definition}[\lutc{}]
- A locally univalent (2,1)-category (henceforth, \lutc{}) is a wild
-  category\footnote{In Cubical jargon, this is what you get by naively
-  transcribing the definition of category in MLTT, without requiring
-  the \(\hom\)-types to be \(\hSet\)s. Similarly, one speaks of wild
-  functors and wild natural transformations.} whose \(\hom\)-types are
-  \(\hGpd\)s. Explicitly:
+ \begin{definition}[\lutc{}] A locally univalent (2,1)-category
+   (henceforth, \lutc{}) is a wild category\footnote{As described in
+   \cite{Capriotti2017}, this is what you get by naively transcribing the definition
+   of category in MLTT, without requiring the \(\hom\)-types to be
+   \(\hSet\)s. Similarly, one speaks of wild functors and wild natural
+   transformations.} whose \(\hom\)-types are \(\hGpd\)s, and whose
+   2-cells satisfy triangle and pentagon equations. Explicitly:
  
  \begin{align*}
 	 C_0              & : \Type                                                                                                                       \\
@@ -194,14 +189,16 @@ analogous properties.
 \begin{section}{Monoids in \(\GpdCont\)}
  
  
- In~\cite{Uustalu2017} and \cite{DePascalis2025} we characterise monoids
- in a monoidal category. How does this generalise to our new scope?
+ In~\cite{Uustalu2017} and resp. \cite{DePascalis2025} we characterise
+  monoids in the monoidal category \((\Cont, {\csubst}, \I)\) of
+  \(\Set\) containers (resp. indexed \(\Set^I\) containers over a
+  fixed set \(I\)), with container substitution in diagrammatic order
+  and the identity container. How does this generalise to our new
+  scope?
  
  \begin{itemize} \item \((\GpdCont, {\csubst}, \I)\), \ie{}
-	       \(\GpdCont\) with container substitution in diagrammatic order
-	       and the identity container, is not strictly associative and
-	       unital on objects, but all the 2-cells you might think of are
-	       trivial; 
+       \(\GpdCont\), is not strictly associative and unital on
+       objects, but all the 2-cells you might think of are trivial; 
 	       
 	 \item \((\Endo(\HGpd), ;, \Id)\) is strictly associative and unital
 	       on objects, but all higher structure is non-trivial.
@@ -238,9 +235,10 @@ analogous properties.
 	 Let \(F \defas \cont{S}{P}\) be a groupoid container. One can define a new
 	 container \(F^* \defas \cont{S^*}{P^*}\) by:
 	 \begin{align*}
-		 S^* & \defas \mu X \; . \; \Unit + \prod_{s : S} (P_s \to X)
+		 S^* & \defas \mu X \; . \; \Unit + \sum_{s : S} (P_s \to X)
 		     & P^*_{\inl \, *}                                        & \defas \Unit                                             \\
-		     &                                                        & P^*_{\inr \, s\, s'} & \defas \sum_{p : P_s} P*_{s'\, p}
+		     &                                                        &
+         P^*_{\inr \, s\, s'} & \defas \sum_{p : P_s} P^*_{s'\, p}
 	 \end{align*}
  \end{definition}
  
