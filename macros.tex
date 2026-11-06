@@ -42,10 +42,14 @@
 \DeclareMathOperator{\id}{id}
 \newcommand{\catname}[1]{\mathsf{#1}}
 \newcommand{\Set}{\catname{Set}}
+\newcommand{\FinSet}{\catname{FinSet}}
+\newcommand{\Cat}{\catname{Cat}}
 \newcommand{\HGpd}{\catname{HGpd}}
 \newcommand{\Cont}{\catname{Cont}}
 \newcommand{\GpdCont}{\catname{GpdCont}}
 \newcommand{\ext}[1]{\llbracket{#1}\rrbracket}
+\newcommand{\settrunc}[1]{\left\Vert{#1}\right\Vert_\Set}
+\newcommand{\ustr}[1]{\langle{#1}\rangle}
 \newcommand{\hSet}{\mathsf{hSet}}
 \newcommand{\hGpd}{\mathsf{hGpd}}
 \newcommand{\Type}{\mathsf{Type}}
@@ -53,6 +57,7 @@
 \DeclareMathOperator{\csubst}{\mathbin\fatsemi}
 \newcommand{\I}{\mathsf{I}}
 \DeclareMathOperator{\Id}{Id}
+\DeclareMathOperator{\Fin}{\mathsf{Fin}}
 
 % \newunicodechar{≃}{\ensuremath{\simeq}}
 % \newunicodechar{λ}{\ensuremath{\lambda}}
@@ -62,7 +67,6 @@
 % \DeclareMathOperator{\Mnd}{Mnd}
 % \DeclareMathOperator{\Poly}{Poly}
 % \DeclareMathOperator{\Nat}{Nat}
-% \DeclareMathOperator{\Fin}{Fin}
 % \DeclareMathOperator{\ICMS}{ICMS}
 % \DeclareMathOperator{\isICMM}{isICMM}
 % \DeclareMathOperator{\PSh}{PSh}
@@ -105,6 +109,7 @@
 % \DeclareMathOperator{\rop}{\mathsf{right}}
 \DeclareMathOperator{\inl}{\mathsf{inl}}
 \DeclareMathOperator{\inr}{\mathsf{inr}}
+\DeclareMathOperator{\refl}{\mathsf{refl}}
 % \DeclareMathOperator{\fst}{\mathsf{fst}}
 % \DeclareMathOperator{\snd}{\mathsf{snd}}
 \renewcommand{\eqdef}{\mathrel{\overset{\mathsf{def}}{=}}}

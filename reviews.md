@@ -89,6 +89,7 @@ This presents very nice work, upgrading parts of the classical theory of contain
 The abstract is unfortunately a bit disorganised and unclear in seeral aspects — it generally feels rather hurriedly written.
 
 - It’s unclear how novel the def of locally univalent (2,1)-categories is — it’s described as “adapted from [4]”. If I’m understanding right and not missing something in [4], this is being rather modest: the definition is really not explicitly present in [4], and so is a genuine contribution here; it’d be worth saying more clearly if so!  On the other hand, if the definition is not novel here, I’d suggest compressing the details slightly — at the moment, it gets much more detail and space than any of the specifics of the title content on groupoid containers.
+  - It is Def. 5
 
 - I found §3 quite hard to follow — had to read it over several times to see what it was trying to say. I think the main confusion is that it poses the question of characterising monoids, then jumps (in the bullet points) into answering the logically prior but different question of how GpdCont and endo(HGpd) can be viewed as monoidal categories. It would be much more comprehensible if the latter question were posed explicitly. Several other bits of unclear writing here compound the problem: e.g. it’s not at all clear to me what’s meant about the 2-cells being trivial/non-trivial in the two examples.
 

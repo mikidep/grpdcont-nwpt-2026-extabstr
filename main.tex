@@ -6,6 +6,9 @@
 \usepackage{todonotes}
 \usepackage{amsthm}
 \usepackage{ebproof}
+\usepackage[english]{babel}
+
+% LTeX: ltex.language = en-GB
 
 \newtheorem*{theorem}{Theorem}
 \newtheorem*{definition}{Definition}
@@ -26,21 +29,14 @@
 
 \title{Groupoid Containers in Locally Univalent (2,1)-Categories}
 
-\author{
-Michele De Pascalis\inst{1}
-\and
-Niccol{\`o} Veltri\inst{2}
-}
+\author{ Michele De Pascalis\inst{1} \and Niccol{\`o} Veltri\inst{2} }
 
 \institute{
-Tallinn University of Technology, Estonia
-\email{michde@taltech.ee}
-\and
-Tallinn University of Technology, Estonia
-\email{niccolo@cs.ioc.ee}
+  Tallinn University of Technology, Estonia \email{michde@taltech.ee} \and
+  Tallinn University of Technology, Estonia \email{niccolo@cs.ioc.ee}
 }
 
-\authorrunning{De Pascalis, Veltri and Uustalu}
+\authorrunning{De Pascalis and Veltri}
 
 \titlerunning{Groupoid Containers in Locally Univalent (2,1)-Categories}
 
@@ -52,218 +48,237 @@ Tallinn University of Technology, Estonia
 
 \vspace{1.2em}
 
-%%%%%%%%%%%
-%% INTRO %%
-%%%%%%%%%%%
-
 Containers~\cite{Abbott2005} are a type-theoretical construct encoding
-signatures for a wide class of strictly positive inductive datatypes.
-A container \(\cont{S}{P}\) consists of a type \(S\) of \emph{shapes}
-and an \(S\)-indexed family of types \(P\). For a shape \(s : S\),
-\(P_s\) is called the type of \emph{positions} for \(s\). For a
-container \(\cont{S}{P}\), a type-level mapping called its
-\emph{interpretation} (or \emph{extent}) is defined, as:
+signatures for a wide class of strictly positive inductive datatypes. A
+container \(\cont{S}{P}\) consists of a type \(S\) of \emph{shapes} and an
+\(S\)-indexed family of types \(P\). For a shape \(s : S\), \(P_s\) is called
+the type of \emph{positions} for \(s\). For a container \(\cont{S}{P}\), a
+type-level mapping called its \emph{interpretation} (or \emph{extent}) is
+defined, as:
 
 \[
-	\ext{\cont{S}{P}} \, X \defas \theext{S}{P}{X}
+  \ext{\cont{S}{P}} \, X \defas \theext{S}{P}{X}
 \]
 
-Least and greatest fixpoints of \(\ext{\cont{S}{P}}\) give semantics
-for W-types and M-types, respectively, having \(\cont{S}{P}\) as their
-signature.
+Least and greatest fixpoints of \(\ext{\cont{S}{P}}\) give semantics for W-types
+and M-types, respectively, having \(\cont{S}{P}\) as their signature.
 
-It is a well known result in the study of containers that \(\ext{-}\)
-extends to a full and faithful functor from the category \(\Cont\) of
-containers and container morphisms, to the category \(\Endo(\Set)\) of
-\(\Set\) endofunctors. Moreover, it has been shown~\cite{Uustalu2017}
-that this functor is strong monoidal when the two categories are
-equipped with the monoidal structures of container substitution on one
-side, and of functor composition on the other.
+It is a well known result in the study of containers that \(\ext{-}\) extends to
+a full and faithful functor from the category \(\Cont\) of containers and
+container morphisms, to the category \(\Endo(\Set)\) of \(\Set\) endofunctors.
+The so defined full subcategory of \(\Endo(\Set)\) corresponds to a class of
+\(\Set\) endofunctors known as \emph{polynomial endofunctors}\footnote{There are
+several variants of the notion of polynomial in category theory, differing in
+approach and generality, and the same is true for containers. Hence, the overlap
+between the two scopes is technically more subtle, though they arguably
+represent attempts to describe the same kind of construction in different
+theoretical settings. A modern categorical treatment of polynomials can be found
+in \cite{Gambino2009}.}. Moreover, it has been shown~\cite{Uustalu2017} that
+this functor is strong monoidal when the two categories are equipped with the
+monoidal structures of container substitution on one side, and of functor
+composition on the other.
 
-Stated in this way, these results apply to the interpretations of type
-theory where types stand for sets. However, it is also well known by
-now that more complex interpretations are possible and worthwhile.
-When attempting to replicate the above reasoning in Homotopy Type
-Theory~\cite{UnivalentFoundationsProgram2013} (an interpretation in
-which types stand for homotopy types), one has to add the constraint
-that shapes and positions are set-truncated, lest the full
-faithfulness result fail to extend.
+Stated in this way, these results apply to the interpretations of type theory
+where types stand for sets. However, it is also well known by now that more
+complex interpretations are possible and worthwhile. When attempting to
+replicate the above reasoning in Homotopy Type
+Theory~\cite{UnivalentFoundationsProgram2013} (an interpretation in which types
+stand for homotopy types), one has to add the constraint that shapes and
+positions are set-truncated, lest the full faithfulness result fail to extend.
 
 In this work we adopt a more foundational approach, exploring a higher
-categorical setting in which groupoid-truncated containers shall be
-rightful inhabitants, where we expect to (and indeed will) find
-analogous properties.
+categorical setting in which groupoid-truncated containers shall be rightful
+inhabitants, where we expect to (and indeed will) find analogous properties.
 % pretty dramatic I know
 
 \begin{section}{Locally Univalent (2,1)-Categories}
- 
- We deal with the following notion of (2,1)-category, adapted from
- ~\cite{Finster2021}:
- 
- \begin{definition}[\lutc{}] A locally univalent (2,1)-category
-   (henceforth, \lutc{}) is a wild category\footnote{As described in
-   \cite{Capriotti2017}, this is what you get by naively transcribing the definition
-   of category in MLTT, without requiring the \(\hom\)-types to be
-   \(\hSet\)s. Similarly, one speaks of wild functors and wild natural
-   transformations.} whose \(\hom\)-types are \(\hGpd\)s, and whose
-   2-cells satisfy triangle and pentagon equations. Explicitly:
- 
- \begin{align*}
-	 C_0              & : \Type                                                                                                                       \\
-	 C_1(X , Y)       & : \hGpd                                          & \forall & X , Y : C_0                                                      \\
-	 \id_X            & : C_1(X , X)                                     & \forall & X : C_0                                                          \\
-	 f \star g        & : C_1(X , Z)                                     & \forall & X, Y, Z : C_0, \; f : C_1(X, Y), \; g : C_1(Y, Z)                \\
-	 \idl_f           & : \id_X \star f \equiv f                         & \forall & X , Y : C_0, f : C_1(X,Y)                                        \\
-	 \idr_f           & : f \star \id_Y \equiv f                         & \forall & X , Y : C_0, f : C_1(X,Y)                                        \\
-	 \assoc_{f, g, h} & : (f \star g) \star h \equiv f \star (g \star h) & \forall & X , Y , Z , W : C_0,                                             \\
-	                  &                                                  &         & f : C_1(X, Y), \; g : C_1(Y, Z), \; h : C_1(Z, W)              
- \end{align*}
- 
- These must satisfy:
- 
- \begin{itemize}
-	 \item The triangle equation: for all appropriately typed \(f, g\),
-	       \[ \assoc_{f, \id_Y,g} \ct f \trl \idl_g = \idr_f \trr g \]
-	 \item The pentagon equation: for all appropriately typed \(f, g, h, k\),
-	       \[
-		       \assoc_{f,g,h} \trr k
-		       \ct \assoc_{f,g \star h,k}
-		       \ct f \trl \assoc_{g,h,k} \
-		       = \assoc_{f \star g,h,k}
-		       \ct \assoc_{f,g,h \star k}
-	       \]
- \end{itemize}
- \end{definition}
- 
- In the above, 2-cell composition \(p \ct q\) is defined as HoTT-style
- path composition, and whiskerings \(f \trl q\) and \(p \trr g\) are
- defined as \eg{} \(f \trl q \defas \cong \, (f \star -) \, q\). Morally,
- we let the identity type \(f \equiv g\) and the associated syntactic
- rules internalise the groupoid structure of a (2,1)-category. As it is
- possible to interpret MLTT as a theory of \(\infty\)-groupoids, this
- provides a lot of the constructions and coherences required by higher
- category theory. For example, all functions between types are
- automatically functorial on their identity groupoids. In particular this
- makes 1-cell composition \(- \star -\) bifunctorial, something which
- would be an extra requirement to be imposed on it in a traditional
- presentation.
- 
- Suitable notions of pseudofunctors and pseudonatural transformations
- can be adapted (in our case from~\cite{Johnson2020}) to this
- setting. For instance, for \((F_0, F_1, F_{\id}, F_{\star})\) a wild
- functor, \(F_1\) being its action on 1-cells, the action on 2-cells
- is given to us by the theory as \(F_2 \defas \cong F_1\). Some extra
- coherences are required, but notably not \(F_\star\) being natural
- on 2-cells, which is provable by path induction. A similar reasoning
- allows us to prove naturality of square fillers for wild natural
- transformations.
- 
- Some examples of locally univalent (2,1)-categories are:
- 
- \begin{itemize}
-	 \item \(\HGpd\), whose objects are \(\hGpd\)s;
-	       
-	 \item Pseudofunctors with pseudonatural transformations between
-	       two fixed \lutc{}s;
-	       
-	 \item Any (pre)category in the HoTT sense, \ie{} any wild category
-	       whose \(\hom\)-types are \(\hSet\)s.
- \end{itemize}
- 
+
+  Bicategories, and in particular locally univalent bicategories, have
+  already been studied in a HoTT setting in \cite{Ahrens2021}.
+  We chose to work with a different notion of bicategory, or (2,1)-category, adapted from
+  ~\cite[Definition 5]{Finster2021}:
+
+  \begin{definition}[\lutc{}]
+    A locally univalent (2,1)-category (henceforth, \lutc{}) is a wild
+    category\footnote{As described in \cite{Capriotti2017}, this is what you get
+    by naively transcribing the definition of category in MLTT, without
+    requiring the \(\hom\)-types to be \(\hSet\)s. Similarly, one speaks of wild
+    functors and wild natural transformations.} whose \(\hom\)-types are
+    \(\hGpd\)s, and whose 2-cells satisfy triangle and pentagon equations.
+    Explicitly:
+
+    \begin{align*}
+      C_0              & : \Type                                                                                                        \\
+      C_1(X , Y)       & : \hGpd                                          & \forall & X , Y : C_0                                       \\
+      \id_X            & : C_1(X , X)                                     & \forall & X : C_0                                           \\
+      f \star g        & : C_1(X , Z)                                     & \forall & X, Y, Z : C_0, \; f : C_1(X, Y), \; g : C_1(Y, Z) \\
+      \idl_f           & : \id_X \star f \equiv f                         & \forall & X , Y : C_0, f : C_1(X,Y)                         \\
+      \idr_f           & : f \star \id_Y \equiv f                         & \forall & X , Y : C_0, f : C_1(X,Y)                         \\
+      \assoc_{f, g, h} & : (f \star g) \star h \equiv f \star (g \star h) & \forall & X , Y , Z , W : C_0,                              \\
+                       &                                                  &         & f : C_1(X, Y), \; g : C_1(Y, Z), \; h : C_1(Z, W)
+    \end{align*}
+
+    These must satisfy:
+
+    \begin{itemize}
+      \item The triangle equation: for all appropriately typed \(f, g\),
+            \[
+              \assoc_{f, \id_Y,g} \ct f \trl \idl_g = \idr_f \trr g
+            \]
+      \item The pentagon equation: for all appropriately typed \(f, g, h, k\),
+            \[
+              \assoc_{f,g,h} \trr k \ct \assoc_{f,g \star h,k} \ct f \trl \assoc_{g,h,k} \
+              = \assoc_{f \star g,h,k} \ct \assoc_{f,g,h \star k}
+            \]
+    \end{itemize}
+  \end{definition}
+
+  In the above, 2-cell composition \(p \ct q\) is defined as HoTT-style path
+  composition, and whiskerings \(f \trl q\) and \(p \trr g\) are defined as
+  \eg{} \(f \trl q \defas \cong \, (f \star-) \, q\). Morally, we let the
+  identity type \(f \equiv g\) and the associated syntactic rules internalise
+  the groupoid structure of a (2,1)-category. As it is possible to interpret
+  MLTT as a theory of \(\infty\)-groupoids, this provides a lot of the
+  constructions and coherences required by higher category theory. For example,
+  all functions between types are automatically functorial on their identity
+  groupoids. In particular this makes 1-cell composition \(- \star -\)
+  bifunctorial, something which would be an extra requirement to be imposed on
+  it in a traditional presentation.
+
+  Suitable notions of pseudofunctors and pseudonatural transformations can be
+  adapted (in our case from~\cite{Johnson2020}) to this setting. For instance,
+  for \((F_0, F_1, F_{\id}, F_{\star})\) a wild functor, \(F_1\) being its
+  action on 1-cells, the action on 2-cells is given to us by the theory as
+  \(F_2 \defas \cong F_1\). Some extra coherences are required, but notably not
+  \(F_\star\) being natural on 2-cells, which is provable by path induction. A
+  similar reasoning allows us to prove naturality of square fillers for wild
+  natural transformations.
+
+  Some examples of locally univalent (2,1)-categories are:
+
+  \begin{itemize}
+    \item \(\HGpd\), whose objects are \(\hGpd\)s;
+
+    \item Wild functors between wild categories \(C\) and \(D\), and
+      wild natural transformations between them, provided that \(D\)
+      has \lutc{} structure;
+
+    \item Any (pre)category in the HoTT sense, \ie{} any wild category whose
+          \(\hom\)-types are \(\hSet\)s.
+  \end{itemize}
+
 \end{section}
 
 \begin{section}{Groupoid Containers}
- 
- A \emph{groupoid container} is a container \(\cont{S}{P}\) such that
- \(S\) is an \(\hGpd\), and so is \(P_s\) for any \(s : S\). Groupoid
- containers with morphisms between them form a \lutc{}, \(\GpdCont\). We
- can now state and prove:
- 
- \begin{theorem} The interpretation of containers \(\ext{-}\) yields a
-	 full and faithful pseudofunctor from \(\GpdCont\) to the \lutc{}
-	 \(\Endo(\HGpd)\) of \(\HGpd\) endopseudofunctors.
- \end{theorem}
- 
+
+  A \emph{groupoid container} \footnote{Gylterud~\cite{Gylterud2011}
+    has also investigated introducing higher structures to containers,
+    by first generalising to \emph{categorified containers}, where
+    \(S\) is a category and \(P\) is a functor from \(S\) to \(\Cat\),
+    and then restricting again to \emph{symmetric containers}, \ie{}
+    categorified containers where \(S\) is a groupoid and \(P\) lands
+    in the \(\Cat\)-subcategory of discrete categories, hence being an
+  \(S\)-indexed families of sets. Our scope is broader, in that we
+consider groupoid-indexed families of groupoids.} is a container
+\(\cont{S}{P}\) such that \(S\) is an \(\hGpd\), and so is \(P_s\) for
+any \(s : S\). Groupoid containers with morphisms between them form a
+\lutc{}, \(\GpdCont\). We can now state and prove:
+
+  \begin{theorem}
+    The interpretation of containers \(\ext{-}\) yields a full and faithful
+    pseudofunctor from \(\GpdCont\) to the \lutc{} \(\Endo(\HGpd)\) of \(\HGpd\)
+    endopseudofunctors.
+  \end{theorem}
+
+Examples of groupoid containers include:
+
+\begin{itemize}
+  \item All set containers as a full subcategory;
+
+  \item \(\cont{\mathbb 2}{\_.S^1}\), whose extent takes \(X\) to
+    pairs of loops in \(X\);
+
+  \item \(\cont{\FinSet}{\mathsf{\ustr{\_}}}\), where \(\FinSet\) is the
+    (large) type of finite sets, \ie{} types that are merely
+    equivalent to \(\Fin n\) for some \(n : \mathbb{N}\), as described
+    in \cite[Section 5]{Joram2023}, and \(\ustr{\_}\) returns
+    the underlying type. Assuming univalence, the
+    loop space on a finite set is equivalent to the set of its
+    automorphisms, so \(X \mapsto
+    \settrunc{\ext{\cont{\FinSet}{\mathsf{El}}}\, X}\) represents the
+    \emph{finite multiset} endofunctor.
+
+\end{itemize}
+
+  % TODO: multisets.
+
 \end{section}
 
 \begin{section}{Monoids in \(\GpdCont\)}
- 
- 
- In~\cite{Uustalu2017} and resp. \cite{DePascalis2025} we characterise
-  monoids in the monoidal category \((\Cont, {\csubst}, \I)\) of
-  \(\Set\) containers (resp. indexed \(\Set^I\) containers over a
-  fixed set \(I\)), with container substitution in diagrammatic order
-  and the identity container. How does this generalise to our new
-  scope?
- 
- \begin{itemize} \item \((\GpdCont, {\csubst}, \I)\), \ie{}
-       \(\GpdCont\), is not strictly associative and unital on
-       objects, but all the 2-cells you might think of are trivial; 
-	       
-	 \item \((\Endo(\HGpd), ;, \Id)\) is strictly associative and unital
-	       on objects, but all higher structure is non-trivial.
- \end{itemize}
- 
- The definition encompassing both is that of a monoidal bicategory
- ~\cite[Section 12.1]{Johnson2020}, which we adapt to the locally
- univalent formulation. In this context we have to pick a suitable
- notion of monoid object. Pseudomonoids in a Gray-monoid are
- described in~\cite[Section 3]{Day1997}, and in classical higher
- category theory this definition somehow suffices to define
- pseudomonoids in a monoidal bicategory, since classically, every
- monoidal bicategory is equivalent to a Gray-monoid. Expectably, to
- meet the constructive locally univalent setting, we end up relaxing
- this definition to describe pseudomonoids in \(\GpdCont\). 
- 
- Formalisation of this part of locally univalent (2,1)-category theory
- is still underway. Nonetheless, we can already apply this definition
- of pseudomonoid in \((\GpdCont, \csubst, \I)\) to replicate the
- combinatorial unpacking seen in~\cite{Uustalu2017}. The resulting
- list of data and equations, though perhaps useful for formalisation
- or instance search purposes, are unwieldy for pen and paper
- presentation.
- 
+
+  In~\cite{Uustalu2017} and resp. \cite{DePascalis2025} we
+  characterise monoids in the monoidal category \((\Cont, {\csubst},
+  \I)\) of \(\Set\) containers (resp. indexed \(\Set^I\) containers
+  over a fixed set \(I\)), with container substitution and the
+  identity container. In order to generalise this to the study of
+  groupoid containers, we took the definition of a monoidal bicategory
+  ~\cite[Section 12.1]{Johnson2020}, and adapted it to our locally
+  univalent formulation. 
+
+  We should now pick a suitable notion of monoid object. Pseudomonoids
+  in a Gray-monoid are described in~\cite[Section 3]{Day1997}, and in
+  classical higher category theory this definition suffices to define
+  pseudomonoids in a monoidal bicategory, since classically, every
+  monoidal bicategory is equivalent to a Gray-monoid. Expectably, to
+  adapt this to our constructive locally univalent setting, we have to
+  relax this definition to describe pseudomonoids in \(\GpdCont\), to
+  obtain the notion of pseudomonoid in a (non-strict, non-univalent)
+  \lutc{}.
+
+  Formalisation of this part of locally univalent (2,1)-category
+  theory is still underway. Nonetheless, we can already apply this
+  definition of pseudomonoid in \((\GpdCont, \csubst, \I)\) to
+  replicate the combinatorial unpacking seen in~\cite{Uustalu2017}.
+  The resulting list of data and equations, though perhaps useful for
+  formalisation or instance search purposes, is unwieldy for pen and
+  paper presentation.
+
 \end{section}
 
 \begin{section}{Free monoids in \(\GpdCont\)}
- 
- In classical category theory, it is well known that the free monad
- over a polynomial functor is itself polynomial. This translates to
- our setting as well.
- 
- \begin{definition}
-	 Let \(F \defas \cont{S}{P}\) be a groupoid container. One can define a new
-	 container \(F^* \defas \cont{S^*}{P^*}\) by:
-	 \begin{align*}
-		 S^* & \defas \mu X \; . \; \Unit + \sum_{s : S} (P_s \to X)
-		     & P^*_{\inl \, *}                                        & \defas \Unit                                             \\
-		     &                                                        &
-         P^*_{\inr \, s\, s'} & \defas \sum_{p : P_s} P^*_{s'\, p}
-	 \end{align*}
- \end{definition}
- 
- This container carries a pseudomonoid structure in the aforementioned
- sense, and it is our working hypothesis that it represents the free
- pseudomonad on \(\ext{F}\), as is the case for set containers.
- Furthermore, we are in the process of proving that it constitutes
- some sort of generalised list object (in the sense of
- ~\cite{Fiore2017}), for which the following inference rule holds:
- 
- \[
-	 \begin{prooftree}
-		 \hypo{H \Rightarrow G}
-		 \hypo{G \csubst F \Rightarrow G}
-		 \infer2{H \csubst F^* \Rightarrow G}
-	 \end{prooftree}
-	 \qquad
-	 \text{for any fixed container \(H\)}
- \]
- 
- Where \(H \Rightarrow G\) denotes container morphisms between \(H\)
- and \(G\).
- 
-\end{section}
 
+  In classical category theory, it is well known that the free monad over a
+  polynomial functor is itself polynomial~\cite{Gambino2009}. This translates to
+  our setting as well.
+
+  \begin{definition}
+    Let \(F \defas \cont{S}{P}\) be a groupoid container. One can define a new
+    container \(F^* \defas \cont{S^*}{P^*}\) by:
+    \begin{align*}
+      S^* & \defas \mu X \; . \; \Unit + \sum_{s : S} (P_s \to X) & {P^*}_{\inl \,*}     & \defas \Unit                       \\
+          &                                                       & P^*_{\inr \, s\, s'} & \defas \sum_{p : P_s} P^*_{s'\, p}
+    \end{align*}
+  \end{definition}
+
+  This container carries a pseudomonoid structure in the aforementioned sense,
+  and it is our working hypothesis that it represents the free pseudomonad on
+  \(\ext{F}\), as is the case for set containers. Furthermore, we are in the
+  process of proving that it constitutes some sort of generalised list object
+  (in the sense of ~\cite{Fiore2017}), for which the following inference rule
+  holds:
+
+  \[
+    \begin{prooftree}
+      \hypo{H \Rightarrow G}
+      \hypo{G \csubst F \Rightarrow G}
+      \infer2{H \csubst F^* \Rightarrow G}
+    \end{prooftree}
+    \qquad \text{for any fixed container \(H\)}
+  \]
+
+  Where \(H \Rightarrow G\) denotes container morphisms between \(H\) and \(G\).
+
+\end{section}
 
 % \label{sect:bib}
 
@@ -272,4 +287,3 @@ analogous properties.
 
 %------------------------------------------------------------------------------
 \end{document}
-
